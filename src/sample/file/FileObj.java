@@ -22,6 +22,10 @@ public class FileObj {
     private File file;
     private static List<String> filterNameList;
     private String copyMessage;
+    /**
+     * 无后缀名字
+     */
+    private String fileNameWzh;
 
     public FileObj(File file) {
         this.file = file;
@@ -58,6 +62,17 @@ public class FileObj {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public String getFileNameWzh() {
+        String fileName = file.getName();
+        int i1 = fileName.lastIndexOf(".");
+        fileName = fileName.substring(0, i1);
+        return fileName;
+    }
+
+    public void setFileNameWzh(String fileNameWzh) {
+        this.fileNameWzh = fileNameWzh;
     }
 
     /**
