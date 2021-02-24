@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="DateTimePicker">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/DateTimePicker.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
