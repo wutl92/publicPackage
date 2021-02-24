@@ -33,8 +33,6 @@ public class CompController implements Initializable {
     public Pane root;
     private Stage stage;
     @FXML
-    private TableColumn compSvn;
-    @FXML
     private TableColumn compIndex;
     @FXML
     private TableColumn compLocal;
@@ -71,11 +69,9 @@ public class CompController implements Initializable {
                 List<SvnLog> svnLogList = Controller.svnLogList;
                 List<FileLog> fileLogList = Controller.fileLogList;
                 total = svnLogList.size();
-                this.compSvn.setCellValueFactory(new PropertyValueFactory("compSvn"));//映射
                 this.compLocal.setCellValueFactory(new PropertyValueFactory("compLocal"));
                 this.compIndex.setCellValueFactory(new PropertyValueFactory("compIndex"));
                 this.compTable.setEditable(true);//表格设置为可编辑
-                this.compSvn.setCellFactory(TextFieldTableCell.forTableColumn());
                 this.compLocal.setCellFactory(TextFieldTableCell.forTableColumn());
                 ObservableList<FileLog> list = FXCollections.observableArrayList();
                 for (int i = 0; i < fileLogList.size(); i++) {
@@ -86,13 +82,12 @@ public class CompController implements Initializable {
                     for (int j = 0; j < svnLogList.size(); j++) {
                         SvnLog svnLog = svnLogList.get(j);
                         String svnLogFileName = svnLog.getFileName();
-                        if(fileName.equals(svnLogFileName)){
+                        if (fileName.equals(svnLogFileName)) {
                             svnFileName = svnLog.getSvnpath();
                         }
                     }
                     fileLog.setCompIndex(i + 1);
-                    fileLog.setCompLocal(localFileLog.getPackpath().replace(FileObj.TOTOPDIR,""));
-                    fileLog.setCompSvn(svnFileName);
+                    fileLog.setCompLocal(localFileLog.getPackpath() + "\n" + svnFileName);
                     list.add(fileLog);
                 }
                 compTable.setItems(list);

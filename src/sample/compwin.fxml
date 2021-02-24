@@ -8,8 +8,7 @@
         <TableView fx:id="compTable" layoutY="27.0" prefHeight="463.0" prefWidth="1200.0">
             <columns>
                 <TableColumn fx:id="compIndex" minWidth="0.0" prefWidth="35.0" text="i" />
-                <TableColumn fx:id="compLocal" minWidth="0.0" prefWidth="436.0" text="本地文件" />
-                <TableColumn fx:id="compSvn" prefWidth="710.0" text="svn文件" />
+                <TableColumn fx:id="compLocal" minWidth="0.0" prefWidth="1140.0" text="本地文件/SVN路径" />
             </columns>
         </TableView>
         <ProgressBar fx:id="compProgress" layoutX="10.0" layoutY="5.0" prefHeight="18.0" prefWidth="1182.0" progress="0.0" />
