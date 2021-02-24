@@ -26,7 +26,7 @@
       <Label layoutX="220.0" layoutY="54.0" text="账号：" />
       <Label layoutX="392.0" layoutY="54.0" text="密码：" />
       <TextField fx:id="username" layoutX="274.0" layoutY="50.0" prefHeight="23.0" prefWidth="104.0" />
-      <TextField fx:id="password" layoutX="438.0" layoutY="50.0" prefHeight="23.0" prefWidth="88.0" />
+      <PasswordField fx:id="password" layoutX="438.0" layoutY="50.0" prefHeight="23.0" prefWidth="88.0" />
       <Label layoutX="15.0" layoutY="84.0" text="SVN日志（不含删除）:" />
       <TableView fx:id="packTable" layoutX="13.0" layoutY="414.0" prefHeight="272.0" prefWidth="1174.0">
         <columns>
