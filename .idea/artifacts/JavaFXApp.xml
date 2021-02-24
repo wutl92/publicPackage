@@ -14,7 +14,7 @@
     </properties>
     <root id="root">
       <element id="archive" name="JavaFXApp.jar">
-        <element id="module-output" name="svnpublic" />
+        <element id="module-output" name="publicPackage" />
       </element>
       <element id="library" level="project" name="sqljet-1.1.11" />
       <element id="library" level="project" name="DateTimePicker" />
