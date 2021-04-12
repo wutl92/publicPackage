@@ -21,6 +21,8 @@ public class FileObj {
     private Date updateTime;
     private File file;
     private static List<String> filterNameList;
+    private static List<String> svnFilePathList;
+
     private String copyMessage;
 
     public FileObj(File file) {
@@ -118,4 +120,11 @@ public class FileObj {
         FileObj.filterNameList = filterNameList;
     }
 
+    public static List<String> getSvnFilePathList() {
+        return svnFilePathList;
+    }
+
+    public static void setSvnFilePathList(List<String> svnFilePathList) {
+        FileObj.svnFilePathList = svnFilePathList;
+    }
 }

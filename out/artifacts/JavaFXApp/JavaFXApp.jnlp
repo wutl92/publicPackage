@@ -9,7 +9,7 @@
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
     <jar href="DateTimePicker.jar" size="18263" download="eager" />
-    <jar href="JavaFXApp.jar" size="16896" download="eager" />
+    <jar href="JavaFXApp.jar" size="17680" download="eager" />
     <jar href="sqljet-1.1.11.jar" size="760201" download="eager" />
     <jar href="svnkit-1.9.3.jar" size="4272184" download="eager" />
   </resources>

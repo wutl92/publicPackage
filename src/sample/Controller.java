@@ -38,7 +38,7 @@ public class Controller {
     @FXML
     private TextField username;
     @FXML
-    private TextField password;
+    private PasswordField password;
     @FXML
     private TableView svnlogTable;
     @FXML
@@ -103,8 +103,10 @@ public class Controller {
                 String srcPathText = srcPath.getText();
                 String destPathText = destPath.getText();
                 List<FileObj> fileObjList = new ArrayList<>();
-                FileUtil.showCopyFiles(fileObjList, new File(srcPathText), beginDate, endTDate);
+                //FileUtil.showCopyFiles(fileObjList, new File(srcPathText), beginDate, endTDate);
+                // 根据SVN提交文件路径查找本地文件。
                 FileObj.setTopDir(srcPathText, destPathText);
+                FileUtil.findSvnToLocalFile(fileObjList);
                 this.packindex.setCellValueFactory(new PropertyValueFactory("packindex"));//映射
                 this.packpath.setCellValueFactory(new PropertyValueFactory("packpath"));
                 this.packTable.setEditable(true);//表格设置为可编辑
@@ -164,6 +166,7 @@ public class Controller {
                 csize = 1;
                 int index = 1;
                 ObservableList<SvnLog> list = FXCollections.observableArrayList();
+                List<String> svnFilePathList = new ArrayList<>();
                 for (int i = stringList.size() - 1; i > -1; i--) {
                     SvnLog svnLog = new SvnLog();
                     String filePath = stringList.get(i);
@@ -175,6 +178,7 @@ public class Controller {
                             fileName = fileName.substring(0, i1);
                             if (!fileNameList.contains(fileName)) {
                                 fileNameList.add(fileName);
+                                svnFilePathList.add(filePath);
                                 svnLog.setSvnpath(filePath);
                                 svnLog.setSvnindex(index + "");
                                 index++;
@@ -189,6 +193,7 @@ public class Controller {
                     svnlogTable.refresh();
                 }
                 FileObj.setFilterNameList(fileNameList);
+                FileObj.setSvnFilePathList(svnFilePathList);
                 csize = stringList.size() + 100;
                 svnProgress.setProgress(1.0);
             } catch (Exception e) {
