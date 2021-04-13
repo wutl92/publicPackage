@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CompController">
+    <children>
+        <TableView fx:id="compTable" layoutY="27.0" prefHeight="463.0" prefWidth="1200.0">
+            <columns>
+                <TableColumn fx:id="compIndex" minWidth="0.0" prefWidth="35.0" text="i" />
+                <TableColumn fx:id="compLocal" minWidth="0.0" prefWidth="1140.0" text="本地文件/SVN路径" />
+            </columns>
+        </TableView>
+        <ProgressBar fx:id="compProgress" layoutX="10.0" layoutY="5.0" prefHeight="18.0" prefWidth="1182.0" progress="0.0" />
+    </children>
+</Pane>

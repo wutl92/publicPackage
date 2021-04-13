@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import sample.file.FileLog;
 import sample.file.FileObj;
 import sample.file.FileUtil;
@@ -60,7 +61,6 @@ public class Controller {
     private TableColumn packindex;
     @FXML
     private TableColumn packpath;
-
     @FXML
     private TableView packTable;
 
@@ -75,6 +75,15 @@ public class Controller {
     private int fileTotal = 1;
 
     private int cfileSize = 1;
+    /**
+     * 本地导出的文件集合
+     */
+    public static List<FileLog> fileLogList = new ArrayList<>();
+
+    /**
+     * SVN导出的文件集合
+     */
+    public static List<SvnLog> svnLogList = new ArrayList<>();
 
     /**
      * 获取svn日志
@@ -118,14 +127,16 @@ public class Controller {
                     boolean b = fileObj.copyFile();
                     if(b){
                         FileLog tableInfo = new FileLog();
-                        tableInfo.setPackindex(index + "");
+                        tableInfo.setPackindex(index);
                         tableInfo.setPackpath(fileObj.getFileNewPath());
+                        tableInfo.setFileName(fileObj.getFileNameWzh());
                         list.add(tableInfo);
                         index++;
-                        this.packTable.setItems(list);
-                        this.packTable.refresh();
                     }
                 }
+                this.packTable.setItems(list);
+                this.packTable.refresh();
+                fileLogList.addAll(list);
                 packProgress.setProgress(1.0);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -180,7 +191,8 @@ public class Controller {
                                 fileNameList.add(fileName);
                                 svnFilePathList.add(filePath);
                                 svnLog.setSvnpath(filePath);
-                                svnLog.setSvnindex(index + "");
+                                svnLog.setSvnindex(index);
+                                svnLog.setFileName(fileName);
                                 index++;
                                 list.add(svnLog);
                             }
@@ -189,9 +201,10 @@ public class Controller {
                         }
                     }
                     csize++;
-                    svnlogTable.setItems(list);
-                    svnlogTable.refresh();
                 }
+                svnlogTable.setItems(list);
+                svnlogTable.refresh();
+                svnLogList.addAll(list);
                 FileObj.setFilterNameList(fileNameList);
                 FileObj.setSvnFilePathList(svnFilePathList);
                 csize = stringList.size() + 100;
@@ -200,6 +213,19 @@ public class Controller {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    /**
+     * 打开对比窗口
+     */
+    public void openCompWin(){
+        Compwin open  = new Compwin();
+        try {
+            Stage stage = new Stage();
+            open.start(stage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

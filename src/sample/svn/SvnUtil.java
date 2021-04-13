@@ -130,7 +130,6 @@ public class SvnUtil {
                         for (String str : strings) {
                             SVNLogEntryPath svnLogEntryPath = changedPaths.get(str);
                             char type = svnLogEntryPath.getType();
-                            System.out.println(type);
                             if('A' == type || 'M' == type){
                                 history.add(svnLogEntryPath.getPath());
                             }

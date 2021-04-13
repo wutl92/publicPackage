@@ -19,8 +19,8 @@
         <TextField fx:id="endVersion" layoutX="808.0" layoutY="50.0" prefHeight="23.0" prefWidth="72.0" />
         <TableView fx:id="svnlogTable" layoutX="13.0" layoutY="106.0" prefHeight="194.0" prefWidth="1174.0">
             <columns>
-                <TableColumn fx:id="svnindex" prefWidth="45.0" text="index" />
-                <TableColumn fx:id="svnpath" prefWidth="1107.0" text="path" />
+                <TableColumn fx:id="svnindex" prefWidth="45.0" text="i" />
+                <TableColumn fx:id="svnpath" prefWidth="1107.0" text="SVN路径" />
             </columns>
         </TableView>
       <Label layoutX="220.0" layoutY="54.0" text="账号：" />
@@ -30,8 +30,8 @@
       <Label layoutX="15.0" layoutY="84.0" text="SVN日志（不含删除）:" />
       <TableView fx:id="packTable" layoutX="13.0" layoutY="414.0" prefHeight="272.0" prefWidth="1174.0">
         <columns>
-          <TableColumn fx:id="packindex" prefWidth="41.0" text="index" />
-          <TableColumn fx:id="packpath" prefWidth="1111.0" text="path" />
+          <TableColumn fx:id="packindex" prefWidth="41.0" text="i" />
+          <TableColumn fx:id="packpath" prefWidth="1111.0" text="本地路径" />
         </columns>
       </TableView>
       <ProgressBar fx:id="svnProgress" layoutX="148.0" layoutY="83.0" prefHeight="18.0" prefWidth="1038.0" progress="0.0" />
@@ -42,5 +42,6 @@
       <ProgressBar fx:id="packProgress" layoutX="77.0" layoutY="382.0" prefHeight="18.0" prefWidth="1111.0" progress="0.0" />
       <Button fx:id="packBtn" layoutX="1119.0" layoutY="345.0" mnemonicParsing="false" onAction="#packPublic" prefHeight="23.0" prefWidth="61.0" text="导出" />
       <Label layoutX="13.0" layoutY="384.0" text="打包文件：" />
+      <Button layoutX="584.0" layoutY="308.0" mnemonicParsing="false" onAction="#openCompWin" text="文件对比" />
     </children>
 </Pane>
