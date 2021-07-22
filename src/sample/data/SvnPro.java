@@ -16,6 +16,7 @@ public class SvnPro {
     private Date lrsj;
     private Integer pxh;
     private String xmdm;
+    private String out;
 
     public String getId() {
         return id;
@@ -63,5 +64,13 @@ public class SvnPro {
 
     public void setXmdm(String xmdm) {
         this.xmdm = xmdm;
+    }
+
+    public String getOut() {
+        return out;
+    }
+
+    public void setOut(String out) {
+        this.out = out;
     }
 }

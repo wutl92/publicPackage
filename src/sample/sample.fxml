@@ -6,7 +6,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
-        <DateTimePicker fx:id="beginTime" layoutX="77.0" layoutY="308.0" />
+        <DateTimePicker fx:id="beginTime" layoutX="85.0" layoutY="309.0" />
         <DateTimePicker fx:id="endTime" layoutX="356.0" layoutY="308.0" />
         <Button fx:id="svnConnBtn" layoutX="934.0" layoutY="50.0" mnemonicParsing="false" onAction="#svnLog" prefHeight="23.0" prefWidth="44.0" text="连接" />
         <Label layoutX="13.0" layoutY="312.0" text="开始时间：" />
@@ -35,17 +35,18 @@
         </columns>
       </TableView>
       <ProgressBar fx:id="svnProgress" layoutX="148.0" layoutY="83.0" prefHeight="18.0" prefWidth="1038.0" progress="0.0" />
-      <Label layoutX="13.0" layoutY="349.0" text="源文件夹：" />
-      <TextField fx:id="srcPath" layoutX="77.0" layoutY="345.0" prefHeight="23.0" prefWidth="458.0" />
-      <Label layoutX="586.0" layoutY="349.0" text="目标文件夹：" />
-      <TextField fx:id="destPath" layoutX="667.0" layoutY="345.0" prefHeight="23.0" prefWidth="417.0" />
-      <ProgressBar fx:id="packProgress" layoutX="77.0" layoutY="382.0" prefHeight="18.0" prefWidth="1111.0" progress="0.0" />
+      <Label layoutX="13.0" layoutY="349.0" text="编译文件夹：" />
+      <TextField fx:id="srcPath" layoutX="85.0" layoutY="345.0" prefHeight="23.0" prefWidth="443.0" />
+      <Label layoutX="535.0" layoutY="349.0" text="输出文件夹：" />
+      <TextField fx:id="destPath" layoutX="616.0" layoutY="345.0" prefHeight="23.0" prefWidth="417.0" />
+      <ProgressBar fx:id="packProgress" layoutX="83.0" layoutY="382.0" prefHeight="18.0" prefWidth="1105.0" progress="0.0" />
       <Button fx:id="packBtn" layoutX="1119.0" layoutY="345.0" mnemonicParsing="false" onAction="#packPublic" prefHeight="23.0" prefWidth="61.0" text="导出" />
-      <Label layoutX="13.0" layoutY="384.0" text="打包文件：" />
+      <Label layoutX="19.0" layoutY="384.0" text="打包文件：" />
       <Button layoutX="584.0" layoutY="308.0" mnemonicParsing="false" onAction="#openCompWin" text="文件对比" />
       <TextField fx:id="fileTotalText" layoutX="1086.0" layoutY="309.0" prefHeight="23.0" prefWidth="94.0" />
       <Label layoutX="1023.0" layoutY="313.0" text="文件总数：" />
       <HBox prefHeight="100.0" prefWidth="200.0" />
-      <Button layoutX="996.0" layoutY="17.0" onAction="#showpro" mnemonicParsing="false" prefHeight="23.0" prefWidth="88.0" text="项目" />
+      <Button layoutX="996.0" layoutY="17.0" mnemonicParsing="false" onAction="#showpro" prefHeight="23.0" prefWidth="88.0" text="项目" />
+      <Button layoutX="1040.0" layoutY="345.0" mnemonicParsing="false" text="选择" onAction="#selectFilePath" />
     </children>
 </Pane>

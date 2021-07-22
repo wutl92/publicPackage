@@ -14,6 +14,7 @@ public class Main extends Application {
         primaryStage.setTitle("SVN打包");
         primaryStage.setScene(new Scene(root, 1200, 700));
         primaryStage.show();
+        StageManger.manager.put("mainStage",primaryStage);
     }
 
 

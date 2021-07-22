@@ -9,7 +9,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import sample.data.MysqlJdbcUtil;
 import sample.data.SvnPro;
 import sample.data.SvnPub;
@@ -99,6 +102,20 @@ public class Controller implements Initializable {
     public void showSvnPath(SvnPro svnPro) {
         this.svnPro = svnPro;
         this.svnUrl.setText(svnPro.getSvnpath());
+        this.srcPath.setText(svnPro.getOut());
+    }
+
+    public void selectFilePath() {
+        DirectoryChooser file = new DirectoryChooser();
+        file.setTitle("请选择输出文件夹");
+        Window window = this.destPath.getScene().getWindow();
+        File newFolder = file.showDialog(window);//这个file就是选择的文件夹了
+        this.destPath.setText(newFolder.getAbsolutePath());
+       /* FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+        Stage  mainStage = (Stage) StageManger.manager.get("mainStage");
+        File file = fileChooser.showOpenDialog(mainStage);*/
     }
 
     /**
@@ -159,9 +176,9 @@ public class Controller implements Initializable {
                 fileLogList.addAll(list);
                 packProgress.setProgress(1.0);
                 int total = FileUtil.getFileTotal(destPathText);
-                fileTotalText.setText(""+total);
+                fileTotalText.setText("" + total);
                 SvnPub svnPub = new SvnPub();
-                if(this.svnPro != null){
+                if (this.svnPro != null) {
                     svnPub.setKsbbh(this.beginVersion.getText());
                     svnPub.setJsbbh(this.endVersion.getText());
                     String xmdm = this.svnPro.getXmdm();
@@ -173,12 +190,12 @@ public class Controller implements Initializable {
                 this.alert("导出成功！");
             } catch (ParseException e) {
                 e.printStackTrace();
-                this.alert("导出失败："+e.getMessage());
+                this.alert("导出失败：" + e.getMessage());
             }
         }).start();
     }
 
-    public void alert(String msg){
+    public void alert(String msg) {
         //允许在其他线程中弹出UI提示
         Platform.runLater(new Runnable() {
             @Override
@@ -236,7 +253,7 @@ public class Controller implements Initializable {
                     int i1 = fileName.lastIndexOf(".");
                     if (i1 > -1) {
                         try {
-                            if(!svnFilePathList.contains(filePath)){
+                            if (!svnFilePathList.contains(filePath)) {
                                 fileNameList.add(fileName);
                                 svnFilePathList.add(filePath);
                                 svnLog.setSvnpath(filePath);
@@ -277,7 +294,7 @@ public class Controller implements Initializable {
         }
     }
 
-    public void showpro(){
+    public void showpro() {
         Datawin datawin = new Datawin();
         try {
             Stage stage = new Stage();

@@ -48,7 +48,7 @@ public class MysqlJdbcUtil {
         try {
             connection = getConnection();
             Statement statement = connection.createStatement();
-            String query = " select id , xmmc,svnpath,lrsj,pxh,xmdm from svn_pro order by pxh asc ";
+            String query = " select id , xmmc,svnpath,lrsj,pxh,xmdm,outpath from svn_pro order by pxh asc ";
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 String id = resultSet.getString(1);
@@ -57,6 +57,7 @@ public class MysqlJdbcUtil {
                 Date lrsj = resultSet.getTimestamp(4);
                 Integer pxh = resultSet.getInt(5);
                 String xmdm = resultSet.getString(6);
+                String out = resultSet.getString(7);
                 SvnPro svnPro = new SvnPro();
                 svnPro.setId(id);
                 svnPro.setXmmc(xmmc);
@@ -64,6 +65,7 @@ public class MysqlJdbcUtil {
                 svnPro.setSvnpath(svnpath);
                 svnPro.setLrsj(lrsj);
                 svnPro.setPxh(pxh);
+                svnPro.setOut(out);
                 svnProList.add(svnPro);
             }
         } catch (Exception throwables) {

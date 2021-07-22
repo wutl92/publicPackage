@@ -85,7 +85,7 @@ public class DataController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //加载表格行点击时间。
+        //加载表格行点击事件。
         List<SvnPro> svnProList = MysqlJdbcUtil.selectSvnProList();
         this.pxh.setCellValueFactory(new PropertyValueFactory("pxh"));
         this.xmmc.setCellValueFactory(new PropertyValueFactory("xmmc"));
