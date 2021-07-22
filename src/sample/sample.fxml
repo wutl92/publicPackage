@@ -43,5 +43,9 @@
       <Button fx:id="packBtn" layoutX="1119.0" layoutY="345.0" mnemonicParsing="false" onAction="#packPublic" prefHeight="23.0" prefWidth="61.0" text="导出" />
       <Label layoutX="13.0" layoutY="384.0" text="打包文件：" />
       <Button layoutX="584.0" layoutY="308.0" mnemonicParsing="false" onAction="#openCompWin" text="文件对比" />
+      <TextField fx:id="fileTotalText" layoutX="1086.0" layoutY="309.0" prefHeight="23.0" prefWidth="94.0" />
+      <Label layoutX="1023.0" layoutY="313.0" text="文件总数：" />
+      <HBox prefHeight="100.0" prefWidth="200.0" />
+      <Button layoutX="996.0" layoutY="17.0" onAction="#showpro" mnemonicParsing="false" prefHeight="23.0" prefWidth="88.0" text="项目" />
     </children>
 </Pane>

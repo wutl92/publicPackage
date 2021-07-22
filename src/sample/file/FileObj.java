@@ -44,18 +44,12 @@ public class FileObj {
     }
 
     public boolean copyFile() {
-        String fileName = file.getName();
-        int i1 = fileName.lastIndexOf(".");
-        fileName = fileName.substring(0, i1);
-        if (!filterNameList.contains(fileName)) {
-            return false;
-        }
         return localCopy(file, getNewFile());
     }
 
     private boolean localCopy(File file, File newFile) {
-        FileUtil.mkDir(newFile.getAbsolutePath());
         try {
+            FileUtil.mkDir(newFile.getAbsolutePath());
             FileUtil.copyFileUsingFileStreams(file.getAbsolutePath(), newFile.getAbsolutePath());
             this.setFileNewPath(newFile.getAbsolutePath());
             this.setCopyMessage("copy file[" + file.getAbsolutePath() + "] to [" + newFile.getAbsolutePath() + "]");

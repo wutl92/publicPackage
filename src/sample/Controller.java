@@ -1,13 +1,18 @@
 package sample;
 
 import com.browniebytes.javafx.control.DateTimePicker;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
+import sample.data.MysqlJdbcUtil;
+import sample.data.SvnPro;
+import sample.data.SvnPub;
 import sample.file.FileLog;
 import sample.file.FileObj;
 import sample.file.FileUtil;
@@ -16,13 +21,15 @@ import sample.svn.SvnUtil;
 import sample.sys.SysUtil;
 
 import java.io.File;
+import java.net.URL;
 import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class Controller {
+public class Controller implements Initializable {
 
     @FXML
     private Button svnConnBtn;
@@ -55,6 +62,8 @@ public class Controller {
     @FXML
     private TextField destPath;
     @FXML
+    private TextField fileTotalText;
+    @FXML
     private Button packBtn;
 
     @FXML
@@ -75,6 +84,8 @@ public class Controller {
     private int fileTotal = 1;
 
     private int cfileSize = 1;
+
+    private SvnPro svnPro;
     /**
      * 本地导出的文件集合
      */
@@ -84,6 +95,11 @@ public class Controller {
      * SVN导出的文件集合
      */
     public static List<SvnLog> svnLogList = new ArrayList<>();
+
+    public void showSvnPath(SvnPro svnPro) {
+        this.svnPro = svnPro;
+        this.svnUrl.setText(svnPro.getSvnpath());
+    }
 
     /**
      * 获取svn日志
@@ -122,10 +138,10 @@ public class Controller {
                 this.packpath.setCellFactory(TextFieldTableCell.forTableColumn());
                 ObservableList<FileLog> list = FXCollections.observableArrayList();
                 int index = 1;
-                for (int i = fileObjList.size() - 1; i > -1; i--) {
+                for (int i = 0; i < fileObjList.size(); i++) {
                     FileObj fileObj = fileObjList.get(i);
                     boolean b = fileObj.copyFile();
-                    if(b){
+                    if (b) {
                         FileLog tableInfo = new FileLog();
                         tableInfo.setPackindex(index);
                         tableInfo.setPackpath(fileObj.getFileNewPath());
@@ -138,10 +154,40 @@ public class Controller {
                 this.packTable.refresh();
                 fileLogList.addAll(list);
                 packProgress.setProgress(1.0);
+                int total = FileUtil.getFileTotal(destPathText);
+                fileTotalText.setText(""+total);
+                SvnPub svnPub = new SvnPub();
+                if(this.svnPro != null){
+                    svnPub.setKsbbh(this.beginVersion.getText());
+                    svnPub.setJsbbh(this.endVersion.getText());
+                    String xmdm = this.svnPro.getXmdm();
+                    String xmmc = this.svnPro.getXmmc();
+                    svnPub.setXmdm(xmdm);
+                    svnPub.setFbxm(xmmc);
+                    MysqlJdbcUtil.insertSvnPub(svnPub);
+                }
+                this.alert("导出成功！");
             } catch (ParseException e) {
                 e.printStackTrace();
+                this.alert("导出失败："+e.getMessage());
             }
         }).start();
+    }
+
+    public void alert(String msg){
+        //允许在其他线程中弹出UI提示
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                //更新JavaFX的主线程的代码放在此处
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("提示");
+                alert.setHeaderText("项目导出");
+                alert.setContentText(msg);
+                alert.show();
+            }
+        });
+
     }
 
     public void svnLogThread() {
@@ -186,8 +232,7 @@ public class Controller {
                     int i1 = fileName.lastIndexOf(".");
                     if (i1 > -1) {
                         try {
-                            fileName = fileName.substring(0, i1);
-                            if (!fileNameList.contains(fileName)) {
+                            if(!svnFilePathList.contains(filePath)){
                                 fileNameList.add(fileName);
                                 svnFilePathList.add(filePath);
                                 svnLog.setSvnpath(filePath);
@@ -218,8 +263,8 @@ public class Controller {
     /**
      * 打开对比窗口
      */
-    public void openCompWin(){
-        Compwin open  = new Compwin();
+    public void openCompWin() {
+        Compwin open = new Compwin();
         try {
             Stage stage = new Stage();
             open.start(stage);
@@ -227,6 +272,17 @@ public class Controller {
             e.printStackTrace();
         }
     }
+
+    public void showpro(){
+        Datawin datawin = new Datawin();
+        try {
+            Stage stage = new Stage();
+            datawin.start(stage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * svn进度条 进程线程
@@ -265,5 +321,18 @@ public class Controller {
             }
         }).start();
 
+    }
+
+    /**
+     * Called to initialize a controller after its root element has been
+     * completely processed.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  <tt>null</tt> if the location is not known.
+     * @param resources The resources used to localize the root object, or <tt>null</tt> if
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        StageManger.manager.put("main", this);
     }
 }

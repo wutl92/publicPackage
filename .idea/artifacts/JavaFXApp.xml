@@ -18,6 +18,7 @@
       </element>
       <element id="library" level="project" name="sqljet-1.1.11" />
       <element id="library" level="project" name="DateTimePicker" />
+      <element id="library" level="project" name="mysql-connector-java-8.0.21" />
     </root>
   </artifact>
 </component>

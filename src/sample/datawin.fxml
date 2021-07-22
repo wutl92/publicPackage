@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DataController">
+    <children>
+        <TableView fx:id="dataTable" layoutY="27.0" onMouseClicked="#dataTableClick" prefHeight="200.0" prefWidth="1200.0">
+            <columns>
+                <TableColumn fx:id="pxh" minWidth="0.0" prefWidth="35.0" text="i" />
+                <TableColumn minWidth="0.0" prefWidth="225.0" text="项目名称" fx:id="xmmc" />
+                <TableColumn minWidth="0.0" prefWidth="99.0" text="项目代码" fx:id="xmdm" />
+                <TableColumn fx:id="svnpath" minWidth="0.0" prefWidth="833.0" text="SVN路径" />
+            </columns>
+        </TableView>
+
+        <TableView fx:id="publogTable" layoutY="257.0" prefHeight="353.0" prefWidth="1200.0">
+            <columns>
+                <TableColumn fx:id="id" minWidth="0.0" prefWidth="110.0" text="i" />
+                <TableColumn fx:id="fbxm" minWidth="0.0" prefWidth="289.0" text="发布项目" />
+                <TableColumn fx:id="ksbbh" minWidth="0.0" prefWidth="285.0" text="开始版本号" />
+                <TableColumn fx:id="jsbbh" minWidth="0.0" prefWidth="272.0" text="结束版本号" />
+                <TableColumn fx:id="fbsj" minWidth="0.0" prefWidth="236.0" text="发布时间" />
+            </columns>
+        </TableView>
+    </children>
+</Pane>

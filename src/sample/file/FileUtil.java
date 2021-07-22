@@ -133,19 +133,25 @@ public class FileUtil {
             fileObj.copyFile();
         }
         System.out.println("copy "+ fileObjList.size());*/
-        List<String> list = new ArrayList<>();
+/*        List<String> list = new ArrayList<>();
         list.add("/dev/java/baq/baq_4/chasstage/code/trunk/chasstage/src/main/java/com/wckj/chasstage/modules/rygj/entity/ChasRygjSnap.java");
         list.add("/dev/java/baq/baq_4/chasstage/code/trunk/chasstage/src/main/resources/mappings/chasstage/rygj/ChasRygjSnapMapper.xml");
         list.add("/dev/java/baq/baq_4/chasstage/code/trunk/chasstage/src/main/webapp/static/chas/bigscreen/bjfj/images/blue.png");
         FileObj.setSvnFilePathList(list);
         FileObj.TOPDIR = "E:\\project\\shengnei\\chasstage\\out1\\artifacts\\chasstage_war_exploded";
-        findSvnToLocalFile(new ArrayList<>());
+        findSvnToLocalFile(new ArrayList<>());*/
+       /* String file = "d:\\Users\\htk\\Desktop\\2021升级包\\省外办案区chasEt_V4.3.107_b-(0408)\\chasEt\\WEB-INF\\classes\\com\\wckj\\chasEt\\web\\ChasQtdjController.class";
+        File realFile = new File(file);
+        System.out.println(realFile.isFile());
+        System.out.println(realFile.length());*/
+        int i = getFileTotal("E:\\git\\mycommon\\svnpublic\\out\\artifacts\\JavaFXApp\\bundles\\JavaFXApp\\app");
+        System.out.println(i);
     }
 
     public static void findSvnToLocalFile(List<FileObj> fileObjList) {
         List<String> svnFilePathList = FileObj.getSvnFilePathList();
-        String file = "";
         for (int i = 0; i < svnFilePathList.size(); i++) {
+            String file = "";
             String svnFilePath = svnFilePathList.get(i);
             if (svnFilePath.contains(SRCPATH)) {
                 String[] srcArr = svnFilePath.split(SRCPATH);
@@ -160,10 +166,9 @@ public class FileUtil {
                 file = FileObj.TOPDIR + "\\" + getClassFileName(webArr[1]);
 
             }
-            System.out.println("============================================");
-            System.out.println(file);
-            if(file.length()>0){
-                FileObj fileObj = new FileObj(new File(file));
+            File realFile = new File(file);
+            if (file.length() > 0 && realFile.isFile() && realFile.length() > 0) {
+                FileObj fileObj = new FileObj(realFile);
                 fileObjList.add(fileObj);
             }
         }
@@ -172,5 +177,43 @@ public class FileUtil {
     public static String getClassFileName(String fileName) {
         String newFileName = fileName.replace(".java", ".class");
         return newFileName;
+    }
+
+    private static class Count{
+        int count = 0;
+
+        public int getCount() {
+            return count;
+        }
+
+        public void setCount(int i) {
+            this.count = i;
+        }
+
+        public void add(){
+            this.count++;
+        }
+    }
+
+    /**
+     * 查询目录下总文件个数
+     * @param destPathText
+     */
+    public static int getFileTotal(String destPathText) {
+        File file = new File(destPathText);
+        Count count = new Count();
+        getCount(file,count);
+        return count.getCount();
+    }
+
+    private static void getCount(File file,Count count){
+        if(file.isFile()){
+            count.add();
+        }else if(file.isDirectory()){
+            File[] files = file.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                getCount(files[i], count);
+            }
+        }
     }
 }
