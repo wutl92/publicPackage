@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="AntProject" default="Build" basedir=".">
+    <property name="srcDir" location="E:\project\spring\challenge\src\main\java\com\example\challenge\common\util"/>
+    <property name="binDir" location="E:\project\spring\challenge\bin"/>
+    <!-- 文件包的位置 -->
+    <property name="package" value="com.example.challenge"/>
+    <property name="mainClass" value="TestMain"/>
+    <target name="Init">
+        <delete dir="${binDir}"/>
+        <mkdir dir="${binDir}"/>
+    </target>
+    <target name="Compile" depends="Init">
+        <javac srcdir="${srcDir}" destdir="${binDir}" includeantruntime="false" >
+            <compilerarg line="-encoding UTF-8"/>
+            <classpath>
+                <fileset dir="${jarDir}" includes="*.jar"/>
+            </classpath>
+        </javac>
+        <copy todir="E:\project\spring\challenge\copy" >
+            <fileset dir="${binDir}">
+                <include name="com\example\challenge\common\util\Demo.class"/>
+            </fileset>
+        </copy>
+    </target>
+    <!--<target name="copyfile" >
+        <copy todir="E:\project\spring\challenge\copy" >
+            <fileset dir="${binDir}">
+                <include name="com\example\challenge\common\util\Demo.class"/>
+            </fileset>
+        </copy>
+    </target>
+-->
+    <!--<target  name="MakeJar" depends="Init,Compile,copyfile">
+        <jar destfile="${jarFile}" >
+            <manifest>
+                <attribute name="Main-Class"
+                           value="${package}.${mainClass}"/>
+            </manifest>
+        </jar>
+    </target>-->
+    <target name="Build" depends="Init,Compile">
+        <echo message="Ant is building the project."/>
+    </target>
+</project>

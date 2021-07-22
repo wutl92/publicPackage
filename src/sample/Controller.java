@@ -140,14 +140,18 @@ public class Controller implements Initializable {
                 int index = 1;
                 for (int i = 0; i < fileObjList.size(); i++) {
                     FileObj fileObj = fileObjList.get(i);
-                    boolean b = fileObj.copyFile();
-                    if (b) {
-                        FileLog tableInfo = new FileLog();
-                        tableInfo.setPackindex(index);
-                        tableInfo.setPackpath(fileObj.getFileNewPath());
-                        tableInfo.setFileName(fileObj.getFileNameWzh());
-                        list.add(tableInfo);
-                        index++;
+                    List<File> newfileList = fileObj.copyFile();
+                    if (newfileList.size() > 0) {
+                        for (int j = 0; j < newfileList.size(); j++) {
+                            FileLog tableInfo = new FileLog();
+                            File newFile = newfileList.get(j);
+                            tableInfo.setPackindex(index);
+                            tableInfo.setPackpath(newFile.getAbsolutePath());
+                            tableInfo.setFileName(newFile.getName());
+                            list.add(tableInfo);
+                            index++;
+                        }
+
                     }
                 }
                 this.packTable.setItems(list);

@@ -2,6 +2,7 @@ package sample.file;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,8 +44,22 @@ public class FileObj {
         return file;
     }
 
-    public boolean copyFile() {
-        return localCopy(file, getNewFile());
+    public List<File> copyFile() {
+        List<File> copyFileList = new ArrayList<>();
+        String name = file.getName();
+        File[] files = file.getParentFile().listFiles();
+        String[] nameAttr = name.split("\\.");
+        String fileName = nameAttr[0];
+        for (int i = 0; i < files.length; i++) {
+            File tempFile = files[i];
+            if (tempFile.getName().indexOf(fileName) > -1) {
+                String localPath = this.filePath.replace(TOPDIR, TOTOPDIR);
+                File newfile = new File(localPath + File.separator + tempFile.getName());
+                localCopy(tempFile, newfile);
+                copyFileList.add(newfile);
+            }
+        }
+        return copyFileList;
     }
 
     private boolean localCopy(File file, File newFile) {
