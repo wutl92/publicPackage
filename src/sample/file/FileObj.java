@@ -52,7 +52,7 @@ public class FileObj {
         String fileName = nameAttr[0];
         for (int i = 0; i < files.length; i++) {
             File tempFile = files[i];
-            if (tempFile.getName().indexOf(fileName+"$") > -1) {
+            if (tempFile.getName().indexOf(fileName) > -1) {
                 String localPath = this.filePath.replace(TOPDIR, TOTOPDIR);
                 File newfile = new File(localPath + File.separator + tempFile.getName());
                 localCopy(tempFile, newfile);
